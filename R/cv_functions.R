@@ -30,7 +30,7 @@ all_bart <- function(cv_element,
     spBART_all <- rspBART(x_train = x_train,
                                     x_test = x_test,y_train = y_train,
                                     n_mcmc = 2500,node_min_size = 5, alpha = alpha_,
-                                    n_burn = 0,nIknots = nIknots_,n_tree = ntree_,
+                                    n_burn = 500,nIknots = nIknots_,n_tree = ntree_,
                                     use_bs = use_bs_,scale_bool = TRUE,plot_preview = FALSE,
                                     motrbart_bool = motr_bart_,
                                     all_var = rsp_bart_all_)
@@ -475,7 +475,7 @@ all_bart_lite_interaction <- function(cv_element,
                     stump = FALSE,dif_order = dif_order_,
                     motrbart_bool = motr_bart_,
                     scale_init = scale_init_,
-                    interaction_term = interaction_term_,
+                    interaction_term = interaction_term_,main_effects_pred = FALSE,
                     update_tau_beta = update_tau_beta_)
 
 

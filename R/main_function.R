@@ -45,6 +45,11 @@ rspBART <- function(x_train,
   #   stop("Define the interaction list.")
   # }
 
+  # Making interaction FALSE for univariate
+  if(NCOL(x_train)==1){
+    interaction_term <- FALSE
+  }
+
   if(isFALSE(interaction_term) & !is.null(interaction_list)){
     stop("Is a model without the interaction but a interaction list is defined")
   }
@@ -264,8 +269,9 @@ rspBART <- function(x_train,
   }
 
   # Renaming only the interactions
-  names(basis_subindex)[(length(dummy_x$continuousVars)+1):length(basis_subindex)] <- concatenate_columns(interaction_list)
-
+  if(interaction_term){
+    names(basis_subindex)[(length(dummy_x$continuousVars)+1):length(basis_subindex)] <- concatenate_columns(interaction_list)
+  }
 
   # ==== COMMENTTED FUNCTIONS BELOW NOT RUN WITH IF NOT INSIDE THE FUNCTION
   # selected_var <- 1
@@ -506,6 +512,8 @@ rspBART <- function(x_train,
     }
 
     # all_P <- append(all_P,all_P_aux)
+  } else {
+    all_P_aux <- NULL
   }
 
   all_P_joint <- vector('list',length = length(all_P_aux)+length(all_P))
@@ -708,12 +716,14 @@ rspBART <- function(x_train,
 
     # Visualizing some plots
     if(plot_preview){
-      par(mfrow = c(2,floor(NCOL(data$x_train)/2)))
-      for(jj in 1:NCOL(data$x_train)){
-      plot(x_train[,jj],colMeans(main_effects_train_list[[jj]][1:i,, drop = FALSE]),main = paste0('X',jj),
-           ylab = paste0('G(X',jj,')'))
+      if(interaction_term){
+          par(mfrow = c(2,floor(NCOL(data$x_train)/2)))
+          for(jj in 1:NCOL(data$x_train)){
+          plot(x_train[,jj],colMeans(main_effects_train_list[[jj]][1:i,, drop = FALSE]),main = paste0('X',jj),
+               ylab = paste0('G(X',jj,')'))
+          }
+          par(mfrow = c(1,1))
       }
-      par(mfrow = c(1,1))
 
     }
     # Getting final predcition

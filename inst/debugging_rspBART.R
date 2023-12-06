@@ -50,7 +50,7 @@ usequants = TRUE
 delta <- 1
 
 # Splines parameters
-nIknots = 2
+nIknots = 5
 dif_order = 1
 motrbart_bool <- FALSE
 use_bs <- FALSE
