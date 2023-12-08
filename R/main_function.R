@@ -620,7 +620,7 @@ rspBART <- function(x_train,
       # Checking the trees variables
       lapply(forest,function(x){x$node0$j}) %>% unlist%>% table()
 
-      forest[[1]] %>% lapply(function(x) x$inter) %>% unlist()
+      forest[[10]] %>% lapply(function(x) x$inter) %>% unlist()
       # # Forcing to grow when only have a stump
       # if(length(forest[[t]])==1){
       #   if(!data$all_var){

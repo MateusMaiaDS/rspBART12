@@ -51,7 +51,7 @@ delta <- 1
 
 # Splines parameters
 nIknots = 5
-dif_order = 1
+dif_order = 2
 motrbart_bool <- FALSE
 use_bs <- FALSE
 plot_preview = FALSE
